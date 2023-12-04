@@ -9,19 +9,16 @@ class User extends Model {
 	use HasFactory;
 
 	protected $table = 'tableAccount';
-	protected $primaryKey = 'id_account';
+
+	protected $primaryKey = 'id';
+
 	protected $fillable = [
-		'id_account',
+		'id',
 		'username',
 		'email',
-		'profile_picture',
-		'google_picture',
-		'access_token',
-		'refresh_token',
-		'platform_with',
+		'avatar',
 		'created_at',
 		'updated_at',
-
 	];
 
 }

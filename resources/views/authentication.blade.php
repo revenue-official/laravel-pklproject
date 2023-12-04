@@ -2,7 +2,7 @@
 @section('container')
 @include('partials.alert')
 <div class="dark: bg-dark bg-neutral-100 flex items-center justify-center h-screen duration-300">
-    @if($title == 'login')
+    @if ($title == 'login')
     {{-- sign in --}}
     <div id="animation" class="elastic-down w-full">
         <div class="dark: fg-dark max-w-md w-full mx-auto p-8 bg-white rounded shadow-md duration-300">
@@ -16,8 +16,8 @@
             <h2 class="text-black dark:text-white text-3xl font-semibold text-center mb-8">Login</h2>
             {{-- LOGIN PLATFORM --}}
             <div class="flex items-center justify-around my-6">
-                <div class="text-sm bg-inherit w-full rounded-md p-1 mx-2 border border-neutral-600 hover:bg-neutral-700 hover:border-neutral-700 duration-200">
-                    <a href="{{route('google')}}" class="flex items-center justify-around font-medium text-blue-600 hover:text-blue-500">
+                <div class="text-sm bg-inherit w-full rounded-md p-1 mx-2 border border-neutral-400 dark:border-neutral-600 hover:bg-neutral-300 dark:hover:border-neutral-700 dark:hover:bg-neutral-700 hover:border-neutral-300 duration-200">
+                    <a href="{{ route('google') }}" class="flex items-center justify-around font-medium text-blue-600 hover:text-blue-500">
                         <svg class="p-1" width="30" height="30" viewBox="-0.5 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <g id="Color-" transform="translate(-401.000000, -860.000000)">
@@ -34,11 +34,11 @@
                                 </g>
                             </g>
                         </svg>
-                        <span class="text-lg text-neutral-500">with Google</span>
+                        <span class="text-lg text-neutral-500 dark:text-neutral-400">with Google</span>
                     </a>
                 </div>
-                <div class="text-sm bg-inherit w-full rounded-md p-1 mx-2 border border-neutral-600 hover:bg-neutral-700 hover:border-neutral-700 duration-200">
-                    <a href="{{route('github')}}" class="flex items-center justify-around font-medium text-blue-600 hover:text-blue-500">
+                <div class="text-sm bg-inherit w-full rounded-md p-1 mx-2 border border-neutral-400 dark:border-neutral-600 hover:bg-neutral-300 dark:hover:border-neutral-700 dark:hover:bg-neutral-700 hover:border-neutral-300 duration-200">
+                    <a href="{{ route('github') }}" class="flex items-center justify-around font-medium text-blue-600 hover:text-blue-500">
                         <svg class="p-1" width="30" height="30" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" class="fill-black dark:fill-white duration-300">
@@ -49,16 +49,21 @@
                                 </g>
                             </g>
                         </svg>
-                        <span class="text-lg text-neutral-500">with Github</span>
+                        <span class="text-lg text-neutral-500 dark:text-neutral-400">with Github</span>
                     </a>
                 </div>
             </div>
-            <form action="{{route('login.go')}}" method="POST">
+            <div class="flex justify-between text-neutral-500">
+                <div class="border-b border-neutral-500 w-full mt-1 mb-7 mx-2"></div>
+                <span class="mx-2 mb-5">or</span>
+                <div class="border-b border-neutral-500 w-full mt-1 mb-7 mx-2"></div>
+            </div>
+            <form action="{{ route('login.go') }}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="mb-4 relative">
                     <label for="email" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 px-2">Email</label>
-                    <input type="email" name="email" id="email" class="dark: bg-dark mt-1 block w-full rounded-md border-neutral-300 shadow-sm outline-none bg-neutral-200 h-8 px-2 duration-300" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" required>
+                    <input type="email" name="email" id="email" class="dark: bg-dark mt-1 block w-full rounded-md border-neutral-300 shadow-sm outline-none bg-neutral-200 h-8 px-2 duration-300" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" autocomplete="off" required>
                 </div>
                 <div class="mb-4 relative">
                     <label for="password" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 px-2">Password</label>
@@ -67,19 +72,21 @@
                 </div>
                 <div class="flex items-center justify-end mb-6">
                     <div class="text-sm">
-                        <a href="{{route('forgot')}}" class="font-medium text-blue-600 hover:text-blue-500">Forgot password?</a>
+                        <a href="{{ route('forgot') }}" class="font-medium text-blue-600 hover:text-blue-500">Forgot
+                            password?</a>
                     </div>
                 </div>
-                <button type="submit" class="w-full py-2 px-4 mt-5 bg-blue-600 text-white rounded-md focus:outline-none focus:bg-blue-700">Sign In</button>
+                <button type="submit" class="w-full py-2 px-4 mt-5 bg-blue-600 text-white rounded-md focus:outline-none focus:bg-blue-700">Sign
+                    In</button>
             </form>
             <p class="mt-8 text-sm text-center">
-                Don't have an account? <a href="{{route('register')}}" class="font-medium text-blue-600 hover:text-blue-500">Sign up</a>
+                Don't have an account? <a href="{{ route('register') }}" class="font-medium text-blue-600 hover:text-blue-500">Sign up</a>
             </p>
         </div>
     </div>
     @endif
     {{-- sign up --}}
-    @if($title == 'register')
+    @if ($title == 'register')
     <div id="animation" class="elastic-down w-full">
         <div class="dark: fg-dark max-w-md w-full mx-auto p-8 bg-white rounded shadow-md duration-300">
             <span class="flex justify-end">
@@ -90,16 +97,16 @@
                 </label>
             </span>
             <h2 class="text-black dark:text-white text-3xl font-semibold text-center mb-8">Register</h2>
-            <form action="{{route('register.go')}}" method="POST">
+            <form action="{{ route('register.go') }}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="mb-4 relative">
                     <label for="email" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 px-2">Email</label>
-                    <input type="email" name="email" id="email" class="dark: bg-dark mt-1 block w-full rounded-md border-neutral-300 shadow-sm outline-none bg-neutral-200 h-8 px-2 duration-300" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" required>
+                    <input type="email" name="email" id="email" class="dark: bg-dark mt-1 block w-full rounded-md border-neutral-300 shadow-sm outline-none bg-neutral-200 h-8 px-2 duration-300" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,32}$" autocomplete="off" required>
                 </div>
                 <div class="mb-4 relative">
                     <label for="user" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 px-2">Username</label>
-                    <input type="text" name="user" id="user" class="dark: bg-dark mt-1 block w-full rounded-md border-neutral-300 shadow-sm outline-none bg-neutral-200 h-8 px-2 duration-300" pattern="[a-zA-Z0-9]{2,16}" required>
+                    <input type="text" name="user" id="user" class="dark: bg-dark mt-1 block w-full rounded-md border-neutral-300 shadow-sm outline-none bg-neutral-200 h-8 px-2 duration-300" pattern="[a-zA-Z0-9].{3,16}" required>
                 </div>
                 <div class="mb-4 relative">
                     <label for="password" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 px-2">Password</label>
@@ -111,16 +118,17 @@
                     <input type="password" name="re-password" id="password" class="dark: bg-dark mt-1 block w-full rounded-md border-neutral-300 shadow-sm outline-none bg-neutral-200 h-8 px-2 duration-300" pattern="[a-zA-Z0-9]{3,32}" required>
                     <i class="ri-eye-off-line absolute top-7 right-2 cursor-pointer"></i>
                 </div>
-                <button type="submit" class="w-full mt-5 py-2 px-4 bg-blue-600 text-white rounded-md focus:outline-none focus:bg-blue-700">Sign Up</button>
+                <button type="submit" class="w-full mt-5 py-2 px-4 bg-blue-600 text-white rounded-md focus:outline-none focus:bg-blue-700">Sign
+                    Up</button>
             </form>
             <p class="mt-8 text-sm text-center">
-                Already have an account? <a href="{{route('login')}}" class="font-medium text-blue-600 hover:text-blue-500">Sign in</a>
+                Already have an account? <a href="{{ route('login') }}" class="font-medium text-blue-600 hover:text-blue-500">Sign in</a>
             </p>
         </div>
     </div>
     @endif
     {{-- sign up --}}
-    @if($title == 'forgot')
+    @if ($title == 'forgot')
     <div id="animation" class="elastic-down w-full">
         <div class="dark: fg-dark max-w-md w-full mx-auto p-8 bg-white rounded shadow-md duration-300">
             <span class="flex justify-end">
@@ -130,17 +138,21 @@
                     <i class="ri-moon-line text-blue-400 moon-neon text-lg"></i>
                 </label>
             </span>
-            <h2 class="text-black dark:text-white text-3xl font-semibold text-center mb-8">{{$getHeader}}</h2>
-            <form action="{{route('forgot.go')}}" method="POST">
+            <h2 class="text-black dark:text-white text-3xl font-semibold text-center mb-8">{{ $getHeader }}</h2>
+            <form action="{{ route('forgot.go') }}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="mb-4 relative">
                     <label for="email" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 px-2">Email</label>
-                    <input type="email" name="email" id="email" class="dark: bg-dark mt-1 block w-full rounded-md border-neutral-300 shadow-sm outline-none bg-neutral-200 h-8 px-2 duration-300" placeholder="example@domain.com" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" required>
+                    <input type="email" name="email" id="email" class="dark: bg-dark mt-1 block w-full rounded-md border-neutral-300 shadow-sm outline-none bg-neutral-200 h-8 px-2 duration-300" placeholder="example@domain.com" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" autocomplete="off" required>
                 </div>
-                @if(session()->has('error'))
+                @if (session()->has('error'))
                 <div class="mb-4 relative">
                     <label for="user" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 px-2">Username</label>
+                    <input type="text" name="user" id="user" class="dark: bg-dark mt-1 block w-full rounded-md border-neutral-300 shadow-sm outline-none bg-neutral-200 h-8 px-2 duration-300" pattern="[a-zA-Z0-9]{2,16}" required>
+                </div>
+                <div class="mb-4 relative">
+                    <label for="user" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 px-2">No-Phone</label>
                     <input type="text" name="user" id="user" class="dark: bg-dark mt-1 block w-full rounded-md border-neutral-300 shadow-sm outline-none bg-neutral-200 h-8 px-2 duration-300" pattern="[a-zA-Z0-9]{2,16}" required>
                 </div>
                 <div class="mb-4 relative">
@@ -154,15 +166,14 @@
                     <i class="ri-eye-off-line absolute top-7 right-2 cursor-pointer"></i>
                 </div>
                 @endif
-                <button type="submit" class="w-full mt-5 py-2 px-4 bg-blue-600 text-white rounded-md focus:outline-none focus:bg-blue-700">{{$getButton}}</button>
+                <button type="submit" class="w-full mt-5 py-2 px-4 bg-blue-600 text-white rounded-md focus:outline-none focus:bg-blue-700">{{ $getButton }}</button>
             </form>
             <p class="mt-8 text-sm text-center">
-                Already have an account? <a href="{{route('login')}}" class="font-medium text-blue-600 hover:text-blue-500">Sign in</a>
+                Already have an account? <a href="{{ route('login') }}" class="font-medium text-blue-600 hover:text-blue-500">Sign in</a>
             </p>
         </div>
     </div>
-    <script type="text/javascript">
-    </script>
+    <script type="text/javascript"></script>
     @endif
 </div>
 @endsection

@@ -1,24 +1,26 @@
-<table id="chooseTable" class="font-sans w-full shadow-md ">
+<table id="chooseTable" class="font-sans w-full shadow-md">
     <!-- Table Head -->
     <thead class="sticky top-0 bg-blue-500 h-10">
         <tr>
-            <th class="text-center text-sm font-semibold text-white">No
+            <th class="text-center text-sm font-semibold text-neutral-100">No
             </th>
-            <th class="text-center text-sm font-semibold text-white">Kode
+            <th class="text-center text-sm font-semibold text-neutral-100">Kode
             </th>
-            <th class="text-center text-sm font-semibold text-white">Nama
+            <th class="text-center text-sm font-semibold text-neutral-100">Nama
             </th>
-            <th class="text-center text-sm font-semibold text-white">Harga
+            <th class="text-center text-sm font-semibold text-neutral-100">Harga
             </th>
-            <th class="text-center text-sm font-semibold text-white">Jenis
+            <th class="text-center text-sm font-semibold text-neutral-100">Jenis
             </th>
-            <th class="text-center text-sm font-semibold text-white">Lokasi
+            <th class="text-center text-sm font-semibold text-neutral-100">Lokasi
             </th>
-            <th class="text-center text-sm font-semibold text-white">Status
+            <th class="text-center text-sm font-semibold text-neutral-100">Status
             </th>
-            <th class="text-center text-sm font-semibold text-white">Tanggal
+            <th class="text-center text-sm font-semibold text-neutral-100">Deskripsi
             </th>
-            <th class="text-center text-sm font-semibold text-white">Action
+            <th class="text-center text-sm font-semibold text-neutral-100">Tanggal
+            </th>
+            <th class="text-center text-sm font-semibold text-neutral-100">Action
             </th>
         </tr>
     </thead>
@@ -52,13 +54,22 @@
                 @endphp
                 {{ $dataStatus->status?:"N/A" }}
             </td>
+            <td class="text-xs p-0 m-0 flex justify-center">
+                <p class="w-36 truncate">{{ $aset->deskripsi }}</p>
+            </td>
             <td class="text-xs p-0 m-0">{{ $aset->date_modified ?: $aset->date_registered }}</td>
             <td class="text-sm p-3 m-0 flex justify-evenly">
+                @if(isset($_COOKIE['userId']))
                 {{-- edit button --}}
                 <button class="open-modal-changes" data-id="{{$aset->id_aset}}" data-target="changesModal"><i class="ri-edit-2-line text-lg cursor-pointer text-orange-500 hover:text-blue-500"></i></button>
                 {{-- delete button --}}
                 <button class="open-modal-delete" data-id="{{$aset->id_aset}}" data-target="deleteModal"><i class="ri-delete-bin-6-line text-lg text-red-500 hover:text-blue-500"></i>
                 </button>
+                @else
+                {{-- delete button --}}
+                <button class="open-modal-read" data-id="{{$aset->id_aset}}" data-target="readModal"><i class="ri-file-list-3-line text-lg text-red-500 hover:text-blue-500"></i>
+                </button>
+                @endif
             </td>
         </tr>
         @endforeach

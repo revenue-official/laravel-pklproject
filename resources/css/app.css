@@ -4,6 +4,18 @@
 @tailwind utilities;
 /*Icon Remix Styles*/
 
+/* Styling scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Styling thumb */
+::-webkit-scrollbar-thumb {
+    background-color: inherit;
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+}
+
 
 /*DARKMODE CONFIGURATION */
 .dark .bg-dark,

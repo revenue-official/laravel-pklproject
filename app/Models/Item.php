@@ -20,6 +20,7 @@ class Item extends Model {
 		'id_jenis',
 		'id_lokasi',
 		'id_status',
+		'deskripsi',
 		'date_registered',
 		'date_modified',
 	];

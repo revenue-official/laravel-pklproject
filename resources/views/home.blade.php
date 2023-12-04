@@ -3,16 +3,18 @@
 @section('container')
 {{-- alert notification --}}
 @include('partials.alert')
-<div class="bg-neutral-50 dark: bg-dark flex min-h-screen w-full justify-center duration-300 gap-5">
+<div class="bg-neutral-100 dark: bg-dark flex min-h-screen w-full justify-center duration-300 gap-5">
     {{-- bagian header top table --}}
+    @if (isset($_COOKIE['userId']))
     <div class="flex flex-col w-10 max-h-[35rem] mt-24 rounded-md z-10 duration-300">
-        <label class="relative block w-10 overflow-hidden">
+        <label class="swipe-right-3 relative block w-10 overflow-hidden">
             <button data-target="addModal" class="open-modal-add w-full h-10 bg-blue-500 text-white rounded-md">
                 <i class="ri-add-fill text-2xl"></i>
             </button>
         </label>
     </div>
-    <div class="relative w-10/12 max-h-[35rem] shadow-md overflow-y-scroll mt-24 rounded-md">
+    @endif
+    <div class="relative w-10/12 max-h-[35rem] overflow-y-scroll mt-24 rounded-sm swipe-left-2">
         {{-- bagian table --}}
         @include('partials.main-table')
     </div>

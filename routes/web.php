@@ -7,9 +7,6 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OauthController;
 use Illuminate\Support\Facades\Route;
 
-//
-//
-//
 // Routing with ItemController
 Route::get('/', [ItemController::class, 'home'])->name('home');
 
@@ -43,6 +40,9 @@ Route::put('/update/{id}', [ItemController::class, 'update'])->name('items.updat
 Route::get('/delete/{id}/{target}', [ItemController::class, 'delete'])->name('items.delete');
 Route::delete('/destroy/{id}', [ItemController::class, 'destroy'])->name('items.destroy');
 
+// Route Update Data
+Route::get('/read/{id}/{target}', [ItemController::class, 'read'])->name('items.read');
+
 // GOOGLE AUTH ROUTE
 Route::get('/google', [OauthController::class, 'redirectToGoogle'])->name('google');
 Route::get('/google/callback', [OauthController::class, 'handleGoogleCallback'])->name('google.callback');
@@ -50,3 +50,6 @@ Route::get('/google/callback', [OauthController::class, 'handleGoogleCallback'])
 // GITHUB AUTH ROUTE
 Route::get('/github', [OauthController::class, 'redirectToGithub'])->name('github');
 Route::get('/github/callback', [OauthController::class, 'handleGithubCallback'])->name('github.callback');
+
+// testAPIs
+Route::match(['get', 'post'], '/apitester', fn() => view('apitester'))->name('apitester');

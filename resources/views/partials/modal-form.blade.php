@@ -1,10 +1,10 @@
 @if ($target == 'addModal')
-<div class="flex w-full min-h-screen absolute top-0 left-0 z-10 justify-center bg-neutral-700 bg-opacity-70">
-    <div class="modalFormAll dark: fg-dark flex m-5 w-2/5 max-h-96 bg-neutral-50 absolute top-0 rounded-md shadow-md animated-swipedown">
+<div class="flex w-full min-h-full absolute top-0 left-0 z-10 justify-center bg-neutral-700 bg-opacity-70">
+    <div class="modalFormAll dark: fg-dark flex m-5 w-2/5 bg-neutral-50 absolute top-0 rounded-md shadow-md overflow-hidden  animated-swipedown">
         <form class="py-1 px-8 w-full m-3" action="{{route('items.save')}}" method="post">
             @csrf
             @method('PUT')
-            <h2 class="dark:text-white text-center text-2xl text-black font-bold my-5">FORM ADD</h2>
+            <h2 class="dark:text-white text-center text-2xl text-black font-bold mt-5 mb-10">FORM ADD</h2>
             {{-- kolom input --}}
             <div class="flex justify-center my-10 gap-5">
                 {{-- getting Id --}}
@@ -54,6 +54,13 @@
                     <span class="text-slate-500 text-sm cursor-default absolute top-[.4rem] left-3 duration-300">STATUS</span>
                 </label>
             </div>
+            {{-- kolom input --}}
+            <div class="flex justify-center my-10 gap-5">
+                <label class="relative w-full flex justify-center">
+                    <textarea id="deskripsi" name="deskripsi" class="dark: bg-dark dark:text-neutral-200 bg-neutral-200 text-neutral-800 border-none text-sm px-2 py-1 w-full h-8 rounded-md shadow-sm bg-inherit border border-slate-500 outline-none focus:h-28 valid:h-28 duration-300 inputtoSpan" pattern="[a-zA-Z0-9].{1,225}" required></textarea>
+                    <span class="text-slate-500 text-sm cursor-default absolute top-[.4rem] left-3 duration-300">DESKRIPSI</span>
+                </label>
+            </div>
             {{-- Button --}}
             <div class="flex justify-end my-10">
                 <label class="absolute">
@@ -67,11 +74,11 @@
 @endif
 @if ($target == 'changesModal')
 <div class="flex w-full min-h-screen absolute top-0 left-0 z-10 justify-center bg-neutral-700 bg-opacity-70">
-    <div class="modalFormAll dark: fg-dark flex m-5 w-2/5 max-h-96 bg-neutral-50 absolute top-0 rounded-md shadow-md  animated-swipedown">
+    <div class="modalFormAll dark: fg-dark flex m-5 w-2/5 bg-neutral-50 absolute top-0 rounded-md shadow-md  overflow-hidden  animated-swipedown">
         <form class="py-1 px-8 w-full m-3" action="{{route('items.update',$item->id_aset)}}" method="post">
             @csrf
             @method('PUT')
-            <h2 class="dark:text-white text-center text-2xl text-black font-bold my-5">FORM CHANGES</h2>
+            <h2 class="dark:text-white text-center text-2xl text-black font-bold mt-5 mb-10">FORM CHANGES</h2>
             {{-- kolom input --}}
             <div class="flex justify-center my-10 gap-5">
                 {{-- getting Id --}}
@@ -134,6 +141,13 @@
                     <span class="text-slate-500 text-sm cursor-text absolute top-[.4rem] left-3 duration-300">STATUS</span>
                 </label>
             </div>
+            {{-- kolom input --}}
+            <div class="flex justify-center my-10 gap-5">
+                <label class="relative w-full flex justify-center">
+                    <textarea id="deskripsi" name="deskripsi" class="dark: bg-dark dark:text-neutral-200 bg-neutral-200 text-neutral-800 border-none text-sm px-2 py-1 w-full h-8 rounded-md shadow-sm bg-inherit border border-slate-500 outline-none focus:h-28 valid:h-28 duration-300 inputtoSpan" pattern="[a-zA-Z0-9].{1,225}" required>{{$item->deskripsi}}</textarea>
+                    <span class="text-slate-500 text-sm cursor-default absolute top-[.4rem] left-3 duration-300">LOKASI</span>
+                </label>
+            </div>
             {{-- Button --}}
             <div class="flex justify-end my-10">
                 <label class="absolute">
@@ -145,9 +159,69 @@
     </div>
 </div>
 @endif
+@if ($target == 'readModal')
+<div class="flex w-full min-h-screen absolute top-0 left-0 z-10 justify-center bg-neutral-700 bg-opacity-70">
+    <div class="modalFormAll dark: fg-dark flex m-5 w-2/5 bg-neutral-50 absolute top-0 rounded-md shadow-md  overflow-hidden  animated-swipedown">
+        <form class="py-1 px-8 w-full m-3">
+            @csrf
+            @method('PUT')
+            <h2 class="dark:text-white text-center text-2xl text-black font-bold mt-5 mb-10">READ ONLY</h2>
+            {{-- kolom input --}}
+            <div class="flex justify-center my-10 gap-5">
+                {{-- getting Id --}}
+                <label class="relative w-full flex justify-center">
+                    <input class="dark: bg-dark dark:text-neutral-200 bg-neutral-200 text-neutral-800 border-none text-sm w-full h-8 rounded-md px-2 shadow-sm bg-inherit border border-slate-500 outline-none cursor-default" type="text" pattern="[a-zA-Z0-9].{1,64}" autocomplete="off" readonly required value="{{$item->kode_aset}}">
+                    <span class="text-blue-500 text-xs font-bold cursor-text absolute top-[-1.3rem] left-3 duration-300">KODE</span>
+                </label>
+                <label class="relative w-full flex justify-center">
+                    <input class="dark: bg-dark dark:text-neutral-200 bg-neutral-200 text-neutral-800 border-none text-sm w-full h-8 rounded-md px-2 shadow-sm bg-inherit border border-slate-500 outline-none cursor-default" type="text" pattern="[a-zA-Z0-9].{1,64}" autocomplete="off" readonly required value="{{$item->nama_aset}}">
+                    <span class="text-blue-500 text-xs font-bold cursor-text absolute top-[-1.3rem] left-3 duration-300">NAME</span>
+                </label>
+            </div>
+            {{-- kolom input --}}
+            <div class="flex justify-center my-10 gap-5">
+                <label class="relative w-full flex justify-center">
+                    <input class="dark: bg-dark dark:text-neutral-200 bg-neutral-200 text-neutral-800 border-none text-sm w-full h-8 rounded-md px-2 shadow-sm bg-inherit border border-slate-500 outline-none cursor-default" type="text" pattern="[0-9]{1,64}" autocomplete="off" readonly required value="{{$item->harga_aset}}">
+                    <span class="text-blue-500 text-xs font-bold cursor-text absolute top-[-1.3rem] left-3 duration-300">HARGA</span>
+                </label>
+                <label class="relative w-full flex justify-center">
+                    @php
+                    $dataJenis = $getJenis->firstWhere('id_jenis', $item->id_jenis);
+                    @endphp
+                    <input class="dark: bg-dark dark:text-neutral-200 bg-neutral-200 text-neutral-800 border-none text-sm w-full h-8 rounded-md px-2 shadow-sm bg-inherit border border-slate-500 outline-none cursor-default" type="text" pattern="[a-zA-Z0-9].{1,64}" autocomplete="off" readonly required value="{{$dataJenis->nama_jenis}}">
+                    <span class="text-blue-500 text-xs font-bold cursor-text absolute top-[-1.3rem] left-3 duration-300">JENIS</span>
+                </label>
+            </div>
+            {{-- kolom input --}}
+            <div class="flex justify-center my-10 gap-5">
+                <label class="relative w-full flex justify-center">
+                    @php
+                    $dataLokasi = $getLokasi->firstWhere('id_lokasi', $item->id_lokasi);
+                    @endphp
+                    <input class="dark: bg-dark dark:text-neutral-200 bg-neutral-200 text-neutral-800 border-none text-sm w-full h-8 rounded-md px-2 shadow-sm bg-inherit border border-slate-500 outline-none cursor-default" type="text" pattern="[a-zA-Z0-9].{1,64}" autocomplete="off" readonly required value="{{$dataLokasi->nama_lokasi}}">
+                    <span class="text-blue-500 text-xs font-bold cursor-text absolute top-[-1.3rem] left-3 duration-300">JENIS</span>
+                </label>
+                <label class="relative w-full flex justify-center">
+                    @php
+                    $dataStatus = $getStatus->firstWhere('id_status', $item->id_status);
+                    @endphp
+                    <input class="dark: bg-dark dark:text-neutral-200 bg-neutral-200 text-neutral-800 border-none text-sm w-full h-8 rounded-md px-2 shadow-sm bg-inherit border border-slate-500 outline-none cursor-default" type="text" pattern="[a-zA-Z0-9].{1,64}" autocomplete="off" readonly required value="{{$dataStatus->status}}">
+                    <span class="text-blue-500 text-xs font-bold cursor-text absolute top-[-1.3rem] left-3 duration-300">JENIS</span>
+                </label>
+            </div>
+            {{-- Button --}}
+            <div class="flex justify-end my-10">
+                <label class="absolute">
+                    <button type="button" class="close-modal-read text-xs h-8 rounded-md px-6 my-2 shadow-sm text-blue-500 font-bold">CANCEL</button>
+                </label>
+            </div>
+        </form>
+    </div>
+</div>
+@endif
 @if($target == 'deleteModal')
 <div class="flex w-full min-h-screen absolute top-0 left-0 z-10 justify-center bg-neutral-700 bg-opacity-70">
-    <div class="modalFormAll dark: fg-dark flex m-5 w-2/5 h-[20%] max-h-fit bg-neutral-50 absolute top-40 rounded-md shadow-md  animated-swipedown">
+    <div class="modalFormAll dark: fg-dark flex m-5 w-2/5 h-[20%] max-h-fit bg-neutral-50 absolute top-40 rounded-md shadow-md  overflow-hidden  animated-swipedown">
         <form class="py-1 px-4 w-full m-2" action="{{route('items.destroy',$item->id_aset)}}" method="post">
             @csrf
             @method('DELETE')

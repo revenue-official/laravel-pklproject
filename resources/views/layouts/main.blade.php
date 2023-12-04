@@ -10,7 +10,10 @@
     <link rel="icon" href="https://laravel.com/img/favicon/favicon-32x32.png">
     @vite('resources/css/app.css')
     @vite('resources/js/console.js')
+    {{-- link for authentification pages --}}
+    @if($title === 'login' || $title === 'register' || $title === 'forgot')
     @vite('resources/js/authentication.js')
+    @endif
     {{-- remix icon cdn --}}
     {{--
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> --}}
@@ -18,7 +21,7 @@
     {{-- <script src="https://kit.fontawesome.com/2434aed004.js" crossorigin="anonymous"></script> --}}
 </head>
 
-<body id="antialiased">
+<body id="antialiased" class="dark: bg-dark">
     <div class="bg-slate-50">
         {{-- hanya untuk halaman selain login --}}
         @if($title !== 'login' && $title !== 'register' && $title !== 'forgot')

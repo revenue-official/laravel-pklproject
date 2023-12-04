@@ -4,7 +4,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
-use App\Models\User;
 use App\Services\ItemServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,15 +18,11 @@ class ItemController extends Controller {
 	}
 
 	public function home(Request $request) {
-		if (!isset($_COOKIE['userId'])) {
-			return redirect()->route('login')->with('error', 'Warning: Please login first.');
-		}
 
 		$tableAset = $this->itemServices->tableAset();
 		$tableJenis = $this->itemServices->tableJenis();
 		$tableLokasi = $this->itemServices->tableLokasi();
 		$tableStatus = $this->itemServices->tableStatus();
-		$tableUser = User::find($_COOKIE['userId']);
 		return view(
 			'home',
 			[
@@ -35,7 +30,6 @@ class ItemController extends Controller {
 				'getJenis' => $tableJenis,
 				'getLokasi' => $tableLokasi,
 				'getStatus' => $tableStatus,
-				'getUser' => $tableUser->attributesToArray(),
 				'title' => 'Home',
 			]
 		);
@@ -45,9 +39,8 @@ class ItemController extends Controller {
 		$query = $request->get('query');
 		$category = $request->get('category');
 
-		if ($category == 'kode_aset' OR $category == 'nama_aset' OR $category == 'harga_aset') {
+		if ($category == 'kode_aset' or $category == 'nama_aset' or $category == 'harga_aset') {
 			$tableAset = Item::where($category, 'like', '%' . $query . '%')->get();
-
 		}
 
 		if ($category == 'id_jenis') {
@@ -82,10 +75,9 @@ class ItemController extends Controller {
 			'getStatus' => $tableStatus,
 			'title' => 'Home',
 		]);
-
 	}
 
-// add data
+	// add data
 	public function add($target) {
 		// $item = Item::find($id);
 		$tableJenis = $this->itemServices->tableJenis();
@@ -110,8 +102,8 @@ class ItemController extends Controller {
 			'id_jenis' => 'required',
 			'id_lokasi' => 'required',
 			'id_status' => 'required',
-
 		]);
+
 		if ($validatedData) {
 			$item = Item::create([
 				'kode_aset' => $request->input('kode_aset'),
@@ -120,6 +112,7 @@ class ItemController extends Controller {
 				'id_jenis' => $request->input('id_jenis'),
 				'id_lokasi' => $request->input('id_lokasi'),
 				'id_status' => $request->input('id_status'),
+				'deskripsi' => $request->input('deskripsi'),
 				'date_registered' => $dateRegistered,
 			]);
 			if ($item) {
@@ -127,16 +120,16 @@ class ItemController extends Controller {
 			} else {
 				return redirect()->route('home')->with('error', 'Item not save.');
 			}
-
 		}
 	}
 
-// Update data
+	// Update data
 	public function edit($id, $target) {
 		$item = Item::find($id);
 		$tableJenis = $this->itemServices->tableJenis();
 		$tableLokasi = $this->itemServices->tableLokasi();
 		$tableStatus = $this->itemServices->tableStatus();
+		$tableAccount = $this->itemServices->tableAccount();
 
 		return view('partials.modal-form', [
 			'target' => $target,
@@ -161,6 +154,7 @@ class ItemController extends Controller {
 			'id_jenis' => $request->input('id_jenis'),
 			'id_lokasi' => $request->input('id_lokasi'),
 			'id_status' => $request->input('id_status'),
+			'deskripsi' => $request->input('deskripsi'),
 		]);
 		if ($item->wasChanged()) {
 			$item->save([
@@ -172,7 +166,22 @@ class ItemController extends Controller {
 		}
 	}
 
-// method delete data
+	public function read($id, $target) {
+		$item = Item::find($id);
+		$tableJenis = $this->itemServices->tableJenis();
+		$tableLokasi = $this->itemServices->tableLokasi();
+		$tableStatus = $this->itemServices->tableStatus();
+		$tableAccount = $this->itemServices->tableAccount();
+		return view('partials.modal-form', [
+			'target' => $target,
+			'item' => $item,
+			'getJenis' => $tableJenis,
+			'getLokasi' => $tableLokasi,
+			'getStatus' => $tableStatus,
+		]);
+	}
+
+	// method delete data
 	public function delete($id, $target) {
 		$item = Item::find($id);
 
@@ -190,8 +199,6 @@ class ItemController extends Controller {
 			return redirect()->route('home')->with('success', 'Item deleted successfully.');
 		} else {
 			return redirect()->route('home')->with('error', 'Item not deleted.');
-
 		}
 	}
-
 }

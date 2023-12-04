@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class ItemServices {
 	public function tableAset() {
 		return DB::table('tableAset')
-			->orderByDesc(DB::raw('IFNULL(date_modified, date_registered)'))
+			->orderBy(DB::raw('IFNULL(date_modified, date_registered)'))
 			->get();
 	}
 	public function tableJenis() {
