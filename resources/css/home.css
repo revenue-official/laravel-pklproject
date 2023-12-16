@@ -1,0 +1,17 @@
+#home {
+    background-image: url("../../../public/img/bg/bg-vector-hd-01.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: -30rem;
+    background-position-x: -30rem;
+}
+
+.analyze-image:hover+.pro-text-card {
+    display: none;
+    opacity: 0;
+}
+
+.pro-text-card:hover {
+    display: none;
+    opacity: 0;
+}
