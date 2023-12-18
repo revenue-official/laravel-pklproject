@@ -16,6 +16,7 @@
     {{-- source css --}}
     @vite('resources/css/app.css')
     @vite('resources/css/home.css')
+    @vite('resources/css/navbar.css')
     {{-- source js --}}
     @vite('resources/js/app.js')
     @vite('resources/js/home.js')

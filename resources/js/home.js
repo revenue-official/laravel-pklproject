@@ -181,24 +181,41 @@ function cardAnimation() {
     const proText = document.querySelectorAll('.pro-text');
     const analyzeImage = document.querySelectorAll('.analyze-image');
 
+
+    const count = proCardSlide.length;
+    const strLength = count.toString().length;
+
+    let firstX = count * 100;
+
+    let firstDuration = () => {
+        if (strLength <= 1) {
+            return '0.' + (count + 2);
+        } else if (strLength >= 2) {
+            let durations = count % 10 == 0 ? (count / 10) : (count / 10 + '' + count % 10);
+            return durations;
+        }
+    }
+
     setTimeout(() => {
         gsap.to(proCardSlide, {
-            x: '-=300',
-            duration: 0.8,
+            x: '-' + firstX + 'px',
+            duration: firstDuration(),
             ease: "power1.inOut",
             delay: 1,
             onComplete: () => {
                 gsap.to(proCardSlide, {
                     x: 0,
-                    duration: 1,
-                    stagger: -0.05,
+                    duration: firstDuration(),
+                    stagger: `-0.${strLength}`,
                     ease: "power1.inOut",
-                    delay: 0.3,
+                    delay: 0.5,
                 });
             }
         });
 
     }, 1500);
+
+
 
 
 }

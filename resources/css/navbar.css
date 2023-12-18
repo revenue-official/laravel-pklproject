@@ -1,1 +1,5 @@
-
+.moon-neon {
+    display: inline-block;
+    z-index: -10;
+    filter: drop-shadow(0 0 10px rgba(10, 155, 255, 0.8)) brightness(200%);
+}

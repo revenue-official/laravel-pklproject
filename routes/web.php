@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AppController;
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +15,9 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', [AppController::class, 'app'])->name('app');
-Route::fallback(fn() => view('404'))->name('notfound');
+Route::fallback(fn () => view('404'))->name('notfound');
 
-Route::get('/home', [HomeController::class, 'proCard'])->name('app');
+
+Route::get('event', function () {
+	return broadcast(new \App\Events\HelloEvent());
+});
